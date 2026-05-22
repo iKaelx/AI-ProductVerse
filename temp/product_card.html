@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>En marchant, en roulant, en naviguant... je suis « écomobile » !</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --accent-color: #28a745;
+            --dark-bg: #1a1a2e;
+            --card-bg: rgba(25, 25, 45, 0.7);
+            --text-color: #e0e0e0;
+            --light-text: #f0f0f0;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --glass-blur: 15px;
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            --spacing-unit: 1rem;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0f20, #000000);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: calc(var(--spacing-unit) * 3) auto;
+            padding: calc(var(--spacing-unit) * 2);
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                grid-template-columns: 3fr 2fr;
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: calc(var(--spacing-unit) * 2.5);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--border-color);
+            box-shadow: var(--glass-shadow);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--light-text);
+            margin-top: 0;
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            text-align: center;
+            line-height: 1.2;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: calc(var(--spacing-unit) * 0.5);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            color: var(--primary-color);
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin-bottom: var(--spacing-unit);
+            color: var(--accent-color);
+        }
+
+        p {
+            margin-bottom: var(--spacing-unit);
+            font-size: 1rem;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        ul li {
+            position: relative;
+            padding-left: calc(var(--spacing-unit) * 2);
+            margin-bottom: calc(var(--spacing-unit) * 0.7);
+            font-size: 0.95rem;
+        }
+
+        ul li::before {
+            content: '•';
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .key-features ul li::before {
+            content: '✓';
+            color: var(--accent-color);
+        }
+
+        .sessions-list ol {
+            list-style: decimal;
+            padding-left: calc(var(--spacing-unit) * 2);
+        }
+
+        .sessions-list ol li {
+            margin-bottom: var(--spacing-unit);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-unit);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .detail-item {
+            background: rgba(40, 40, 70, 0.6);
+            padding: var(--spacing-unit);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+        }
+
+        .detail-item strong {
+            display: block;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: calc(var(--spacing-unit) * 0.3);
+        }
+
+        .price-section {
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2);
+            background: rgba(0, 123, 255, 0.2);
+            border-radius: 15px;
+            margin-top: calc(var(--spacing-unit) * 3);
+            border: 1px solid var(--primary-color);
+        }
+
+        .price {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-unit);
+            letter-spacing: -1px;
+            text-shadow: 0 0 15px rgba(40, 167, 69, 0.5);
+        }
+
+        .price span {
+            font-size: 1.5rem;
+            vertical-align: super;
+        }
+
+        .btn-add-to-cart {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 2);
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: background 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-add-to-cart:hover {
+            background: darken(var(--primary-color), 10%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.6);
+        }
+
+        .marketing-banner {
+            background: linear-gradient(45deg, rgba(0, 123, 255, 0.7), rgba(40, 167, 69, 0.7));
+            border-radius: 20px;
+            padding: calc(var(--spacing-unit) * 2);
+            text-align: center;
+            margin-top: calc(var(--spacing-unit) * 3);
+            border: 1px solid var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.4);
+        }
+
+        .marketing-banner h3 {
+            color: var(--light-text);
+            font-size: 1.8rem;
+            margin-bottom: var(--spacing-unit);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .marketing-banner p {
+            font-size: 1.1rem;
+            color: var(--light-text);
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .marketing-banner .btn {
+            background: var(--light-text);
+            color: var(--dark-bg);
+            padding: calc(var(--spacing-unit) * 0.8) calc(var(--spacing-unit) * 1.8);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .marketing-banner .btn:hover {
+            background: #e0e0e0;
+            color: var(--primary-color);
+        }
+
+        .product-image-placeholder {
+            background: linear-gradient(45deg, #0f0f20, #000000);
+            border-radius: 15px;
+            height: 300px; /* Adjust height as needed */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.4);
+            border: 1px dashed var(--border-color);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image-placeholder::before {
+            content: 'Image du Projet';
+            position: absolute;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .technical-specifications ul {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-unit);
+        }
+        .technical-specifications ul li {
+            background: rgba(40, 40, 70, 0.6);
+            padding: var(--spacing-unit);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.95rem;
+            margin-bottom: 0; /* Override default li margin */
+        }
+        .technical-specifications ul li::before {
+            display: none; /* Hide default bullet */
+        }
+        .technical-specifications ul li strong {
+            color: var(--primary-color);
+            margin-right: var(--spacing-unit);
+            white-space: nowrap;
+        }
+        .technical-specifications ul li span {
+            text-align: right;
+            flex-grow: 1;
+        }
+
+        .lexicon ul {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: calc(var(--spacing-unit) * 0.7);
+        }
+        .lexicon ul li {
+            background: rgba(40, 40, 70, 0.6);
+            padding: calc(var(--spacing-unit) * 0.7);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        .lexicon ul li::before {
+            display: none;
+        }
+        
+        .resources ul li a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .resources ul li a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 767px) {
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.6rem;
+            }
+            h3 {
+                font-size: 1.2rem;
+            }
+            .container {
+                padding: calc(var(--spacing-unit) * 1.5);
+                margin: calc(var(--spacing-unit) * 2) auto;
+            }
+            .card {
+                padding: calc(var(--spacing-unit) * 1.5);
+            }
+            .price {
+                font-size: 2.8rem;
+            }
+            .btn-add-to-cart {
+                font-size: 1rem;
+                padding: calc(var(--spacing-unit) * 0.8) calc(var(--spacing-unit) * 1.5);
+            }
+            .product-image-placeholder {
+                height: 200px;
+            }
+            .lexicon ul {
+                grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <h1 class="product-title">En marchant, en roulant, en naviguant... je suis « écomobile » !</h1>
+            
+            <div class="card product-image-section">
+                <div class="product-image-placeholder"></div>
+            </div>
+
+            <div class="card product-features-section">
+                <h2>Fonctionnalités Clés du Projet</h2>
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <strong>Niveaux Conseillés</strong>
+                        CM2, 6e
+                    </div>
+                    <div class="detail-item">
+                        <strong>Durée Estimée</strong>
+                        6 séances de 1 heure chacune
+                    </div>
+                    <div class="detail-item">
+                        <strong>Séquence Pédagogique</strong>
+                        La voiture : histoire et fonctionnement
+                    </div>
+                </div>
+
+                <h3>Objectifs d'apprentissage</h3>
+                <ul class="key-features">
+                    <li>Comprendre les grandes étapes de l'évolution de la voiture</li>
+                    <li>Comprendre l'origine des émissions de CO2 dans le moteur à combustion interne</li>
+                    <li>Étudier et fabriquer une voiture solaire</li>
+                </ul>
+            </div>
+
+            <div class="card sessions-section">
+                <h2>Déroulé des Séances</h2>
+                <div class="sessions-list">
+                    <ol>
+                        <li>Quelles sont les grandes évolutions de l'automobile au cours de son histoire ?</li>
+                        <li>Qu'est-ce qui est à l'origine des émissions de CO2 d'une automobile ?</li>
+                        <li>Peut-on utiliser l'énergie solaire pour faire avancer une voiture ?</li>
+                        <li>Comment faire tourner les roues à l'aide d'une cellule photovoltaïque ?</li>
+                        <li>Quel schéma électrique adopter ?</li>
+                        <li>Fabrication de la voiture solaire</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="card marketing-banner">
+                <h3>Transformez l'apprentissage en une aventure concrète !</h3>
+                <p>Ce projet "écomobile" offre une immersion unique dans la science et l'ingénierie, combinant histoire, écologie et fabrication. Idéal pour stimuler la curiosité et l'innovation chez les jeunes esprits.</p>
+                <a href="https://www.fondation-lamap.org/projets-thematiques" target="_blank" class="btn">Découvrez plus de projets</a>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="card price-section">
+                <p class="price">
+                    Gratuit<span>*</span>
+                </p>
+                <p style="font-size: 0.85rem; color: rgba(255, 255, 255, 0.7); margin-bottom: var(--spacing-unit);">*Accessible gratuitement via le site La main à la pâte</p>
+                <button class="btn-add-to-cart" onclick="window.open('https://www.fondation-lamap.org/projets-thematiques', '_blank')">Accéder au projet</button>
+            </div>
+
+            <div class="card technical-specifications">
+                <h2>Notions Clés Abordées</h2>
+                <ul>
+                    <li><strong>Invention de l'automobile</strong>: 1771</li>
+                    <li><strong>Premier moteur</strong>: Machine à vapeur</li>
+                    <li><strong>Fonctionnement moteur à combustion</strong>: Combustion carburant, gaz, piston</li>
+                    <li><strong>Impact CO2</strong>: Émissions, changement climatique</li>
+                    <li><strong>Énergie solaire</strong>: Utilisation pour propulsion</li>
+                    <li><strong>Circuit électrique</strong>: Chaîne ininterrompue de conducteurs</li>
+                    <li><strong>Moteur électrique</strong>: Conversion énergie électrique en mécanique</li>
+                </ul>
+            </div>
+
+            <div class="card required-materials">
+                <h2>Matériel Nécessaire</h2>
+                <ul>
+                    <li>Panneau photovoltaïque</li>
+                    <li>Moteur électrique</li>
+                    <li>Fils électriques</li>
+                    <li>Ampoule ou diode électroluminescente</li>
+                    <li>Batterie rechargeable</li>
+                    <li>Matériaux de récupération (bouchon, paille, pic, carton, polystyrène, bois, plastique, carton plume)</li>
+                </ul>
+            </div>
+
+            <div class="card lexicon">
+                <h2>Lexique Spécifique</h2>
+                <ul>
+                    <li>Fardier</li>
+                    <li>Calèche</li>
+                    <li>Moteur à combustion</li>
+                    <li>Châssis</li>
+                    <li>Artillerie</li>
+                    <li>Automobile</li>
+                    <li>Cellule photovoltaïque</li>
+                    <li>Moteur</li>
+                    <li>Pile</li>
+                    <li>Circuit fermé</li>
+                    <li>Interrupteur</li>
+                </ul>
+            </div>
+
+            <div class="card resources">
+                <h2>Ressources Supplémentaires</h2>
+                <ul>
+                    <li><a href="https://www.fondation-lamap.org/fr/node/46884" target="_blank">Fiche 13 : Le fardier de Cugnot, une des premières automobiles</a></li>
+                    <li><a href="https://www.fondation-lamap.org/fr/node/46885" target="_blank">Fiche 14 : L'histoire de l'automobile en photos</a></li>
+                    <li><a href="https://www.fondation-lamap.org/fr/node/46886" target="_blank">Fiche 15 : Les voitures solaires</a></li>
+                    <li><a href="https://www.fondation-lamap.org/projets-thematiques" target="_blank">Site web de la Fondation La main à la pâte</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

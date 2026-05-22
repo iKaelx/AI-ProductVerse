@@ -1,0 +1,13 @@
+.env
+
+outputs/
+uploads/
+
+node_modules/
+
+*.png
+*.jpg
+*.jpeg
+*.pdf
+*.glb
+*.obj
